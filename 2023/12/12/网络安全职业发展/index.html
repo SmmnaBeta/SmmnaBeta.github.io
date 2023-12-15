@@ -1,0 +1,405 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <canvas id="fireworks" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"></canvas>
+    <script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
+    <script src="/js/fireworks.min.js"></script>
+    <canvas id="background" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1"></canvas>
+    <script src="/js/background.min.js"></script>
+<head>
+    <meta charset="utf-8" />
+    <title>网络安全职业发展 | 是木木呐Beta的博客</title>
+    <meta name="author" content="是木木呐Beta" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <link rel="icon" href="/images/LogoLight.png" />
+    <link rel="preconnect" href="https://cdn.staticfile.org" />
+<script src="https://cdn.staticfile.org/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="/fontawesome/css/all.min.css" />
+<link rel="stylesheet" href="https://blog.hoshiroko.com/css/font.css" />
+<link rel="preconnect" href="https://fonts.loli.net" />
+<link rel="preconnect" href="https://gstatic.loli.net" crossorigin />
+<!-- <link rel="stylesheet" href="https://fonts.loli.net/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap" /> -->
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://cdn.staticfile.org/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdn.staticfile.org/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.staticfile.org/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>是木木呐BETA的博客</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;主页</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;关于</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;文章</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;类型</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;标签</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;是木木呐BETA的博客</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">主页</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">关于</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">文章</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">类型</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>网络安全职业发展</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/12/12
+        </span>
+        
+        <span class="category">
+            <a href="/categories/%E7%9F%A5%E8%AF%86/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                知识
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" style="color: #ffa2c4">网络安全</a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/" style="color: #00a596">职业规划</a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="SOC"><a href="#SOC" class="headerlink" title="SOC"></a>SOC</h1><h2 id="SOC1级-初级安全分析师"><a href="#SOC1级-初级安全分析师" class="headerlink" title="SOC1级 初级安全分析师"></a>SOC1级 初级安全分析师</h2><ul>
+<li>监控调查告警</li>
+<li>配置和使用安全工具和安全产品如（IPS、ITS、UTS、WAF、堡垒机）<span id="more"></span></li>
+</ul>
+<p>知识点：</p>
+<ul>
+<li>网络防御框架<ul>
+<li>哈希值</li>
+<li>IP</li>
+<li>域名</li>
+<li>主机</li>
+<li>代理</li>
+<li>工具</li>
+<li>防御战术</li>
+</ul>
+</li>
+<li>威胁情报<ul>
+<li>情报工具</li>
+<li>平台</li>
+</ul>
+</li>
+<li>流量分析<ul>
+<li>数据包基础知识</li>
+<li>各种协议</li>
+<li>上网行为审计系统的高级应用</li>
+</ul>
+</li>
+<li>端点安全<ul>
+<li>widows核心进程</li>
+<li>windows日志</li>
+<li>操作系统安全</li>
+</ul>
+</li>
+<li>事件管理</li>
+<li>数字取证</li>
+<li>网络钓鱼</li>
+</ul>
+<h1 id="安全分析师"><a href="#安全分析师" class="headerlink" title="安全分析师"></a>安全分析师</h1><ul>
+<li>与各利益相关人员合作，分析整个公司的网络安全态势</li>
+<li>写报告，编写网络安全的持续报告，记录安全问题采取的措施</li>
+<li>制定安全计划，纳入对新工具和趋势的研究，跨团队维护数据安全所需要的措施<ul>
+<li>网络安全基础（概论）</li>
+<li>预安全</li>
+<li>SOC1级</li>
+</ul>
+</li>
+</ul>
+<h1 id="安全工程师"><a href="#安全工程师" class="headerlink" title="安全工程师"></a>安全工程师</h1><ul>
+<li>跨软件测试筛选安全措施（代码审计）</li>
+<li>监控网络和报告，更新系统缓解漏洞</li>
+<li>实现最佳安全性系统的架构规划<ul>
+<li>SOC1级</li>
+<li>渗透测试</li>
+<li>攻击性渗透</li>
+</ul>
+</li>
+</ul>
+<h1 id="事件响应者"><a href="#事件响应者" class="headerlink" title="事件响应者"></a>事件响应者</h1><ul>
+<li>制定事件响应计划</li>
+<li>维护安全最佳实践，支持事件响应措施</li>
+<li>为了未来的攻击做准备，吸取教训，规划协调<ul>
+<li>SOC1级</li>
+</ul>
+</li>
+</ul>
+<h1 id="数字取证检察员"><a href="#数字取证检察员" class="headerlink" title="数字取证检察员"></a>数字取证检察员</h1><ul>
+<li>再遵守法律程序的同时收集数字证据</li>
+<li>分析数字证据找到与事件（案件）相关的答案</li>
+<li>记录发现并报告</li>
+</ul>
+<h1 id="恶意软件分析师"><a href="#恶意软件分析师" class="headerlink" title="恶意软件分析师"></a>恶意软件分析师</h1><ul>
+<li>对恶意程序进行静态分析，逆向工程</li>
+<li>通过在受控的环境中观察恶意软件的活动，对恶意软件样本进行动态分析</li>
+<li>记录发现并报告</li>
+</ul>
+<h1 id="渗透测试人员"><a href="#渗透测试人员" class="headerlink" title="渗透测试人员"></a>渗透测试人员</h1><ul>
+<li>对计算机系统、网络和基于Web的程序进行测试</li>
+<li>执行安全评估、审计和分析策略</li>
+<li>评估和报告<ul>
+<li>普通渗透测试</li>
+<li>攻击</li>
+</ul>
+</li>
+</ul>
+<h1 id="红队"><a href="#红队" class="headerlink" title="红队"></a>红队</h1><ul>
+<li>模拟威胁参与者的角色，以发现可利用的漏洞、保持访问权限并规避检测</li>
+<li>评估组织的安全控制、威胁情报和事件响应程序</li>
+<li>评估和报告见解，为公司提供可操作的数据，避免实际情况的发生。<ul>
+<li>边界突破<ul>
+<li>侦察</li>
+<li>武器化</li>
+<li>钓鱼</li>
+<li>密码攻击</li>
+</ul>
+</li>
+<li>突破后<ul>
+<li>枚举系统</li>
+<li>布局</li>
+<li>权限提升</li>
+<li>本地持久化</li>
+<li>横向</li>
+<li>数据外泄</li>
+</ul>
+</li>
+<li>主机规避<ul>
+<li>Windows内部结构</li>
+<li>Windows API</li>
+<li>Abusing 滥用（Windows内部）</li>
+<li>AV规避（ShellCode）（汇编 C++ Python Java）</li>
+<li>混淆原则</li>
+<li>UAC绕过 User Accout control</li>
+<li>运行时的规避</li>
+<li>规避日志记录</li>
+<li>本地化</li>
+</ul>
+</li>
+<li>网络安全规避<ul>
+<li>防火墙规避</li>
+<li>沙盒规避</li>
+<li>蜜罐规避</li>
+</ul>
+</li>
+<li>Acitve Directory（域）<ul>
+<li>基础知识</li>
+<li>违反Actice Directory</li>
+<li>枚举Active Directory</li>
+<li>横向移动</li>
+<li>利用Active Directory</li>
+<li>域内持久化</li>
+<li>凭据收集</li>
+</ul>
+</li>
+<li>痕迹清理</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+    
+    
+    
+    
+    <div id="comment">
+        <div id="giscus-container" class="giscus"></div>
+    </div>
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2017 - 2023 是木木呐Beta的博客
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;是木木呐Beta
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+<script
+    src="https://giscus.app/client.js"
+    data-repo="SmmnaBeta/SmmnaBeta.github.io"
+    data-repo-id="R_kgDOK4ohFQ"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOK4ohFc4CbrDD"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="zh-CN"
+    crossorigin
+    async
+></script>
+
+
+
+
+
+    
+</body>
+</html>
